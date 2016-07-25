@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import 'jquery-validation';
+import 'jquery-validation';   // used for full client-side validation support
 import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
@@ -11,6 +11,8 @@ const login = () => {
   const email = getInputValue(component.refs.emailAddress);
   const password = getInputValue(component.refs.password);
 
+  // To control the login redirect,
+  // redirect the user to whatever authenticated route they were trying to access before they logged in
   Meteor.loginWithPassword(email, password, (error) => {
     if (error) {
       Bert.alert(error.reason, 'warning');
@@ -47,7 +49,9 @@ const validate = () => {
         required: 'Need a password here.',
       },
     },
-    submitHandler() { login(); },
+    submitHandler() {
+      login();   // login 
+    },
   });
 };
 

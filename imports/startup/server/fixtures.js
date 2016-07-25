@@ -1,3 +1,5 @@
+/* Account Generation file - it runs a check to see if the users specified exist. If they do not, it adds each missing user */
+
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Accounts } from 'meteor/accounts-base';

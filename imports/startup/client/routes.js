@@ -1,3 +1,5 @@
+/* React Router behaves like a React component in that it itself needs to be rendered */
+
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
@@ -11,7 +13,8 @@ import { RecoverPassword } from '../../ui/pages/recover-password';
 import { ResetPassword } from '../../ui/pages/reset-password';
 import { Signup } from '../../ui/pages/signup';
 
-const requireAuth = (nextState, replace) => {
+// For Authentication
+const requireAuth = (nextState, replace) => {   // nextState & replace from React Router
   if (!Meteor.loggingIn() && !Meteor.userId()) {
     replace({
       pathname: '/login',
@@ -20,6 +23,7 @@ const requireAuth = (nextState, replace) => {
   }
 };
 
+// run this inside of a Meteor.startup() block to ensure that all of our components and other code have loaded before attempting to assign routes
 Meteor.startup(() => {
   render(
     <Router history={ browserHistory }>
